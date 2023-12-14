@@ -1,7 +1,7 @@
 import uuid from "react-uuid";
 import React, { useState } from "react";
 import "./index.css";
-
+import { RiDeleteBin5Line } from "react-icons/ri";
 export default function App() {
   const salesForceVariables = [
     "choose",
@@ -167,8 +167,11 @@ export default function App() {
     })
   }
   return (
-    <>
-      <h1>Field Mapper</h1>
+    <section>
+      <div className="titles-div">
+        <p>SalesForce fields</p>
+        <p>CallHub custom fields</p>
+      </div>
       {rows.map((row, i) => 
        {
         return  (<div key={uuid()}>
@@ -185,17 +188,22 @@ export default function App() {
               <option key={sfv}>{sfv}</option>
             ))}
           </select>
-          <button onClick={()=>handleDelete(i)}>Delete</button>
+          <button onClick={()=>handleDelete(i) } className="delete-cta"><RiDeleteBin5Line /></button>
         </div>
       )})}
-      <button onClick={AddAnotherField}>Map Another Field</button>
-      <button onClick={SubFieldMapper}>SubMit</button>
+      <div className="cta-group">
+      <div className="cta" onClick={AddAnotherField}>
+        <p className="cta-icon">+</p>
+        <button >Map Another Field</button>
+      </div>
+      <button onClick={SubFieldMapper} className="submit-cta">Save and import lists</button>
+      </div>
       {
         fieldMappers.length?<>
         <hr/>
         {fieldMappers.map((field)=><p key={uuid()}>{field[0]} {field[1]}</p>)}
         </>:null
       }
-    </>
+    </section>
   );
 }

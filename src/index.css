@@ -8,6 +8,69 @@ h1 {
 }
 
 select {
-  margin: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 150px;
   cursor: pointer;
+  height: 30px;
+}
+
+.titles-div{
+  display: flex;
+}
+.titles-div p{
+  margin-left: 10px;
+  width:150px;
+}
+.delete-cta{
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.cta{
+margin-left: 10px;
+width: 120px;
+cursor: pointer;
+border-style: dashed ;
+border-width:1px;
+border-color: #6880f7;
+display: flex;
+height: 30px;
+cursor: pointer;
+font-weight: bold;
+}
+.cta >button{
+  font-size: 0.6rem;
+  width: 100%;
+  border: 0px;
+  cursor: pointer;
+}
+.cta-icon{
+  width: 20px;
+  height: 100%;
+  font-size: 1rem;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6880f7;
+  background-color: #dfe2f7;
+}
+
+.submit-cta{
+  margin-left: 80px;
+  font-size: 0.6rem;
+  cursor: pointer;
+  border-width: 0px;
+  background-color: rgb(2,170,400);
+  color: #ffff;
+  font-weight: bold;
+}
+section{
+  height: 100vh;
+}
+
+.cta-group{
+  display: flex;
 }
