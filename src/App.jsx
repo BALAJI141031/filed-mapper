@@ -26,7 +26,23 @@ export default function App() {
     let salesForceVariablesCopy =[...salesForceVariables]
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
-         // Add UP previous VALUE IN OTHER ELEMENTS
+      // Handle choose option early return should require
+      if(selectedValue==="choose"){
+        const previousValue=updatedRows[rowIndex].sv.previousValue
+        for(let i=0;i<updatedRows.length;i++){
+          if(!updatedRows[i].sv.options.includes(previousValue)){
+            updatedRows[i].sv.options.push(previousValue)
+          }
+        }
+        updatedRows[rowIndex].sv = {
+          previousValue: prevRows[rowIndex].sv.previousValue?prevRows[rowIndex].sv.actualValue:selectedValue,
+          actualValue: "choose",
+          options:updatedRows[rowIndex].sv.options
+        };
+        return updatedRows
+      }
+
+     // Add UP previous VALUE IN OTHER ELEMENTS
          for(let l=0;l<updatedRows.length;l++){
           const replacement=updatedRows[rowIndex].sv.previousValue
           const isAlreadyFound=updatedRows[l].sv.options.filter((option)=>option==replacement)
@@ -37,8 +53,6 @@ export default function App() {
           updatedRows[l].sv.options.push(replacement)
           }
         }
-        console.log(updatedRows[0],"updatedRows--------->00000")
-        console.log(updatedRows[1],"updatedRows--------->00000")
       updatedRows[rowIndex].sv = {
         previousValue: prevRows[rowIndex].sv.previousValue?prevRows[rowIndex].sv.actualValue:selectedValue,
         actualValue: selectedValue,
@@ -80,6 +94,21 @@ export default function App() {
     let callHubValuesCopy =[...callHubValues]
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
+      // Handle choose option early return should require
+      if(selectedValue==="choose"){
+        const previousValue=updatedRows[rowIndex].callHubvalue.previousValue
+        for(let i=0;i<updatedRows.length;i++){
+          if(!updatedRows[i].callHubvalue.options.includes(previousValue)){
+            updatedRows[i].callHubvalue.options.push(previousValue)
+          }
+        }
+        updatedRows[rowIndex].callHubvalue = {
+          previousValue: prevRows[rowIndex].callHubvalue.previousValue?prevRows[rowIndex].callHubvalue.actualValue:selectedValue,
+          actualValue: "choose",
+          options:updatedRows[rowIndex].callHubvalue.options
+        };
+        return updatedRows
+      }
          // Add UP previous VALUE IN OTHER ELEMENTS
          for(let l=0;l<updatedRows.length;l++){
           const replacement=updatedRows[rowIndex].callHubvalue.previousValue
@@ -131,13 +160,23 @@ export default function App() {
     // remove used salesforce variable values
     let salesForceVariablesCopy =[...salesForceVariables]
     prevRows.map((row)=>{
-      salesForceVariablesCopy=salesForceVariablesCopy.filter((item)=> row.sv?.actualValue!==item
+      salesForceVariablesCopy=salesForceVariablesCopy.filter((item)=>{
+        if(item=="choose"){
+          return true
+        }
+        return row.sv?.actualValue!==item 
+      } 
       )
     })
     // remove used callhub values
     let callHubVariablesCopy =[...callHubValues]
     prevRows.map((row)=>{
-      callHubVariablesCopy=callHubVariablesCopy.filter((item)=>item!==row.callHubvalue.actualValue)
+      callHubVariablesCopy=callHubVariablesCopy.filter((item)=>{
+        if(item=="choose"){
+          return true
+        }
+        return item!==row.callHubvalue.actualValue
+      })
     })
     // this is to update options
     // const arr=prevRows.map((row)=>row.sv.options.filter((innerRow)=>))
