@@ -222,6 +222,8 @@ export default function App() {
       }
       setFieldMappers(result)
     })
+    setRows([{ sv: {options:salesForceVariables}, callHubvalue: {options:callHubValues} }])
+    
   }
   return (
     <section>
@@ -258,7 +260,7 @@ export default function App() {
       {
         fieldMappers.length?<>
         <hr/>
-        {fieldMappers.map((field)=><p key={uuid()}>{field[0]} {field[1]}</p>)}
+        {fieldMappers.map((field)=><p key={uuid()} className="mapped-text">{field[0]} - {field[1]}</p>)}
         </>:null
       }
     </section>

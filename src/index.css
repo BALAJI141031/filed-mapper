@@ -74,3 +74,8 @@ section{
 .cta-group{
   display: flex;
 }
+
+.mapped-text{
+  margin-left: 10px;
+  font-size: bold;
+}
