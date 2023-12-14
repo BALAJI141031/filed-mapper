@@ -1,0 +1,13 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: red;
+}
+
+select {
+  margin: 10px;
+  cursor: pointer;
+}
