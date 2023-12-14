@@ -24,7 +24,6 @@ export default function App() {
   const handleSfv = (e, rowIndex) => {
     const selectedValue = e.target.value;
     let salesForceVariablesCopy =[...salesForceVariables]
-    
     setRows((prevRows) => {
       const updatedRows = [...prevRows];
          // Add UP previous VALUE IN OTHER ELEMENTS
@@ -38,12 +37,24 @@ export default function App() {
           updatedRows[l].sv.options.push(replacement)
           }
         }
+        console.log(updatedRows[0],"updatedRows--------->00000")
+        console.log(updatedRows[1],"updatedRows--------->00000")
       updatedRows[rowIndex].sv = {
-        previousValue: prevRows[rowIndex].sv.previousValue?prevRows[rowIndex].sv.previousValue:selectedValue,
+        previousValue: prevRows[rowIndex].sv.previousValue?prevRows[rowIndex].sv.actualValue:selectedValue,
         actualValue: selectedValue,
         options:salesForceVariablesCopy
       };
-            // FREE UP SELECTED VALUE IN OTHER ELEMENTS
+
+      // double check previous value is added properly or not:
+      for(let l=0;l<updatedRows.length;l++){
+        const prviousValue=updatedRows[rowIndex].sv.previousValue
+        if(!updatedRows[l].sv.options.includes(prviousValue)){
+          updatedRows[l].sv.options.push(prviousValue)
+        }
+      }
+
+
+      // FREE UP SELECTED VALUE IN OTHER ELEMENTS
             for(let i=0;i<updatedRows.length;i++){
               // same element so need to skip
               if(updatedRows[i].sv?.actualValue==selectedValue){
@@ -62,7 +73,6 @@ export default function App() {
          
       return updatedRows;
     });
-
   };
 
   const handleCallHubValues = (e, rowIndex) => {
@@ -82,10 +92,18 @@ export default function App() {
           }
         }
       updatedRows[rowIndex].callHubvalue = {
-        previousValue: prevRows[rowIndex].callHubvalue.previousValue?prevRows[rowIndex].callHubvalue.previousValue:selectedValue,
+        previousValue: prevRows[rowIndex].callHubvalue.previousValue?prevRows[rowIndex].callHubvalue.actualValue:selectedValue,
         actualValue: selectedValue,
         options:callHubValuesCopy
       };
+
+            // double check previous value is added properly or not:
+            for(let l=0;l<updatedRows.length;l++){
+              const prviousValue=updatedRows[rowIndex].callHubvalue.previousValue
+              if(!updatedRows[l].callHubvalue.options.includes(prviousValue)){
+                updatedRows[l].callHubvalue.options.push(prviousValue)
+              }
+            }
             // FREE UP SELECTED VALUE IN OTHER ELEMENTS
             for(let i=0;i<updatedRows.length;i++){
               // same element so need to skip
