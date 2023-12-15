@@ -246,12 +246,10 @@ export default function App() {
   const SubFieldMapper = () => {
     const result = [];
     rows.map((row) => {
-      const svActualValue=row.sv.actualValue
-      const callHubActualValue=row.callHubvalue.actualValu
       console.log(row.sv.actualValue, row.callHubvalue.actualValue);
-      if (svActualValue && callHubActualValue) {
-        if((svActualValue!=="choose" && callHubActualValue!=="choose")){
-          result.push([svActualValue, callHubActualValue]);
+      if (row.sv.actualValue && row.callHubvalue.actualValue ) {
+        if(!(row.sv.actualValue=="choose" || row.callHubvalue.actualValue=="choose")){
+          result.push([row.sv.actualValue, row.callHubvalue.actualValue]);
         }
       }
       setFieldMappers(result);
